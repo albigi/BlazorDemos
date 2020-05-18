@@ -1,0 +1,41 @@
+@page "/PrintInfo"
+@using wasm
+
+<h1>Runtime Info</h1>
+
+    <table class="border-0 align-content-center align-self-center">
+        @{
+            foreach (var info in Info)
+            {
+                <tr>
+                    <td>@info.Key</td>
+                    <td>@info.Value</td>
+                </tr>
+            }
+        }
+    </table>
+
+<p>Etry point: @entrypoint</p>
+<hr/>
+
+@code {
+    private IDictionary<string, string> Info => infoPrinter.PrintEnvironmentInfo();
+    private string entrypoint;
+    private EnvironmentPrinter infoPrinter;
+    
+    protected override void OnInitialized() {
+        Refresh();
+    }
+
+    private void Refresh() {
+
+        infoPrinter = new EnvironmentPrinter();
+        
+        try {
+            entrypoint = System.Reflection.Assembly.GetEntryAssembly().EntryPoint.Name;
+        }
+        catch {
+            entrypoint = "Reflection not available";
+        }
+    }
+}

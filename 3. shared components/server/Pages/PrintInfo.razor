@@ -1,0 +1,33 @@
+@page "/PrintInfo"
+@using wasm
+@using InfoPage.Components
+
+@inject GlobalIncrementHandler GlobalIncrementHandler
+
+<EnvInfo></EnvInfo>
+
+<p>Refresh count</p>
+<ul>
+    <li>Global: @globalRefresh</li>
+    <li>Local: @localRefresh</li>
+</ul>
+
+<button class="btn btn-primary" @onclick="Refresh">Refresh</button>
+
+@code {
+    private static int globalRefresh = 0;
+    private int localRefresh = 0;
+    
+    protected override void OnInitialized() {
+        GlobalIncrementHandler.OnIncrement += () =>
+        {
+            InvokeAsync(StateHasChanged);
+        };
+        Refresh();
+    }
+
+    private void Refresh() {
+        GlobalIncrementHandler.Increment(ref globalRefresh);
+        localRefresh++;
+    }
+}
