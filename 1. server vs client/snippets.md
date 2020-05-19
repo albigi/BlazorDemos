@@ -12,31 +12,31 @@
 
 ## CODE
 
-    ```
-    private static int globalRefresh = 0;
-    private int localRefresh = 0;
-    ```
+```
+private static int globalRefresh = 0;
+private int localRefresh = 0;
+```
 
-    ```
-    GlobalIncrementHandler.Increment(ref globalRefresh);
-    localRefresh++;
-    ```
+```
+GlobalIncrementHandler.Increment(ref globalRefresh);
+localRefresh++;
+```
 
-    ```
-    GlobalIncrementHandler.OnIncrement += () =>
-        {
-            InvokeAsync(StateHasChanged);
-        };
-    ```
-
-    ```
-    public class GlobalIncrementHandler
+```
+GlobalIncrementHandler.OnIncrement += () =>
     {
-        public Action OnIncrement {get;set;}
-        public void Increment(ref int i)
-        {
-            System.Threading.Interlocked.Increment(ref i);
-            OnIncrement?.Invoke();
-        }
+        InvokeAsync(StateHasChanged);
+    };
+```
+
+```
+public class GlobalIncrementHandler
+{
+    public Action OnIncrement {get;set;}
+    public void Increment(ref int i)
+    {
+        System.Threading.Interlocked.Increment(ref i);
+        OnIncrement?.Invoke();
     }
-    ```
+}
+```
