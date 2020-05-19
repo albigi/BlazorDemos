@@ -1,6 +1,6 @@
 using System;
 
-namespace wasm
+namespace server
 {
     public class GlobalIncrementHandler
     {

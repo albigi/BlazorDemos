@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using wasm;
 
-namespace wasm
+namespace server
 {
     public class EnvironmentPrinter : IEnvironmentPrinter
     {
