@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace wasm
+namespace server
 {
     public interface IEnvironmentPrinter
     {
